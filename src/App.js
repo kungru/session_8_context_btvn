@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
-
+import {useState} from 'react';
+import ContextLanguage from './context/ContextLanguage';
+import Page from './Page/Page';
 function App() {
+  const [language,setLanguage]=useState( {
+    logo:'MindX',
+    login:'Login',
+    t:'Sign in',
+    placeholder:'Username ...',
+    welcome: 'welcome',
+    hello:'Welcome back',
+  },
+);
+  const [display, setDisplay]=useState(true);
+  const [user,setUser]=useState('');
+  console.log(display);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <ContextLanguage.Provider value={{language:language, setLanguage:setLanguage, display:display,setDisplay:setDisplay,user:user,setUser:setUser} }>
+        <Page />
+      </ContextLanguage.Provider>
+      
+   
   );
 }
 
